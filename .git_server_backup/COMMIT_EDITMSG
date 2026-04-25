@@ -1,1 +1,0 @@
-Fix: Backend verifyCoupon now returns discountType to satisfy frontend ICoupon type

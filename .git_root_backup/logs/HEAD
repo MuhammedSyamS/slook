@@ -1,9 +1,0 @@
-0000000000000000000000000000000000000000 0e8964077e2622fd3e184e3c34ac85bc665d7bf9 Muhammed Syam <shamsaifudheen@gmail.com> 1770963050 +0530	commit (initial): Initial commit: Production Ready HighPhaus E-Commerce
-0e8964077e2622fd3e184e3c34ac85bc665d7bf9 2e6a7c99f32e6d0d5878bd757ce3531eb76f9d64 Muhammed Syam <shamsaifudheen@gmail.com> 1772035054 +0530	commit: Fix: Production 404/CORS errors and guest cart support
-2e6a7c99f32e6d0d5878bd757ce3531eb76f9d64 9c169c1e3d2dc8600d26410c3071c1d11f420718 Muhammed Syam <shamsaifudheen@gmail.com> 1772045764 +0530	commit: chore: update client submodule/reference
-9c169c1e3d2dc8600d26410c3071c1d11f420718 a7620c7d7078265edf16d51a424c917b8555b657 Muhammed Syam <shamsaifudheen@gmail.com> 1772047837 +0530	commit: Fix: Resolve ReferenceError for Zap and GoogleLogin components, optimize build
-a7620c7d7078265edf16d51a424c917b8555b657 f491eb468b7b9e3faf07d606d64e40864b33c1b9 Muhammed Syam <shamsaifudheen@gmail.com> 1772108781 +0530	commit: fix: ProductDetails imports, loyalty ledger mobile, shop grid, navbar help link
-f491eb468b7b9e3faf07d606d64e40864b33c1b9 34599c22d3fb385009696626ca2f451b22579435 Muhammed Syam <shamsaifudheen@gmail.com> 1772118988 +0530	commit: fix: ReferenceError handleAddToCart in ProductDetails mobile
-34599c22d3fb385009696626ca2f451b22579435 7f2cd3a417c51438be849264c45fdd81e7ebf3e4 Muhammed Syam <shamsaifudheen@gmail.com> 1772698169 +0530	commit: Fix Read More and review modals
-7f2cd3a417c51438be849264c45fdd81e7ebf3e4 11ef09885007f8eb48dfd79c4131e36e90ebd68b Muhammed Syam <shamsaifudheen@gmail.com> 1773309433 +0530	commit: fix: product view count increment crashing due to lean query
-11ef09885007f8eb48dfd79c4131e36e90ebd68b a1fa52be10873c2e32d87449ccddba8bd6d274f1 Muhammed Syam <shamsaifudheen@gmail.com> 1773411955 +0530	commit: Comprehensive stabilization, authentication, and routing fixes for production deployment

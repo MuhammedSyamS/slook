@@ -1,7 +1,0 @@
-0000000000000000000000000000000000000000 4c94f26eb2140a4d667980ea9624ecff02c5a971 Muhammed Syam <shamsaifudheen@gmail.com> 1777030181 +0530	commit (initial): Initial commit - Production Hardened SLOOK
-4c94f26eb2140a4d667980ea9624ecff02c5a971 0000000000000000000000000000000000000000 Muhammed Syam <shamsaifudheen@gmail.com> 1777030181 +0530	Branch: renamed refs/heads/master to refs/heads/main
-0000000000000000000000000000000000000000 4c94f26eb2140a4d667980ea9624ecff02c5a971 Muhammed Syam <shamsaifudheen@gmail.com> 1777030181 +0530	Branch: renamed refs/heads/master to refs/heads/main
-4c94f26eb2140a4d667980ea9624ecff02c5a971 062cf416c6f1656a759d07aefeb0e9af7d443d6b Muhammed Syam <shamsaifudheen@gmail.com> 1777128034 +0530	commit: Revert Admin Dashboard UI to original and push production-hardened optimizations
-062cf416c6f1656a759d07aefeb0e9af7d443d6b e21019c869d4a3813e84559601b317d63f6a46f5 Muhammed Syam <shamsaifudheen@gmail.com> 1777128540 +0530	commit: Set up Vercel deployment and fixed root monorepo configuration
-e21019c869d4a3813e84559601b317d63f6a46f5 f60f04957d9ab40cc99fadc93945bcd242218cbd Muhammed Syam <shamsaifudheen@gmail.com> 1777129199 +0530	commit: Performance: Implemented Redis caching for stats and optimized notification indexes
-f60f04957d9ab40cc99fadc93945bcd242218cbd f80d5c7a8c57b44b5e31c7db47dc72a238d518e3 Muhammed Syam <shamsaifudheen@gmail.com> 1777137832 +0530	commit: Fix: Resolved ICoupon type mismatch in CartDrawer and backend verifyCoupon

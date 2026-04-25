@@ -1,6 +1,6 @@
 {
   "name": "slook-ecommerce",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SLOOK E-Commerce Platform",
   "private": true,
   "workspaces": [

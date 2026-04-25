@@ -62,7 +62,10 @@ export const useCartStore = create<CartState>()(
           const { data } = await api.post('/cart/add', {
             productId,
             quantity: product.quantity || 1,
-            selectedVariant: product.selectedVariant
+            selectedVariant: product.selectedVariant,
+            name: product.name,
+            price: product.price,
+            image: product.image
           });
           if (data && Array.isArray(data)) set({ items: data });
         } catch (err) {

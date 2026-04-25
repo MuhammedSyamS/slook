@@ -21,7 +21,14 @@ pnpm-debug.log*
 # Build
 dist/
 build/
+.next/
+out/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Backups
+.git_slook_backup/
+.git_server_backup/
+.git_root_backup/

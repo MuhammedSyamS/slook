@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 const repos = [
     {
         name: 'slook',
-        url: 'https://github.com/MuhammedSyamS/E-commerce-2-frontend.git',
+        url: 'https://github.com/MuhammedSyamS/slook.git',
         dir: path.resolve(__dirname, 'slook'),
         commit: 'Sync SLOOK frontend to legacy repository'
     },
@@ -24,11 +24,11 @@ fs.mkdirSync(tempDir);
 repos.forEach(repo => {
     console.log(`Processing ${repo.name}...`);
     const targetPath = path.join(tempDir, repo.name);
-    
+
     // Clone
     console.log(`Cloning ${repo.url}...`);
     execSync(`git clone ${repo.url} ${targetPath}`, { stdio: 'inherit' });
-    
+
     // Delete everything except .git
     console.log(`Cleaning ${repo.name}...`);
     const files = fs.readdirSync(targetPath);
@@ -36,7 +36,7 @@ repos.forEach(repo => {
         if (file === '.git') return;
         fs.rmSync(path.join(targetPath, file), { recursive: true, force: true });
     });
-    
+
     // Copy new files (excluding .git and node_modules)
     console.log(`Copying files for ${repo.name}...`);
     const sourceFiles = fs.readdirSync(repo.dir);
@@ -51,7 +51,7 @@ repos.forEach(repo => {
             fs.copyFileSync(src, dst);
         }
     });
-    
+
     // Commit and Push
     console.log(`Pushing ${repo.name}...`);
     execSync(`git add .`, { cwd: targetPath, stdio: 'inherit' });

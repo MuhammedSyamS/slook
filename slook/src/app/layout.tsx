@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
   icons: {
-    icon: '/Slook.jpeg',
-    shortcut: '/Slook.jpeg',
-    apple: '/Slook.jpeg',
+    icon: '/slook.png',
+    shortcut: '/slook.png',
+    apple: '/slook.png',
   },
   manifest: '/manifest.json',
 };

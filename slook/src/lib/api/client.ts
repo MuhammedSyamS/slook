@@ -49,10 +49,11 @@ client.interceptors.response.use(
     // Standardize error log for debugging without spamming
     if (process.env.NODE_ENV === 'development') {
         const isTimeout = error.message?.includes('timeout');
-        const isBackground = error.config?.url?.includes('/notifications');
+        const isNetworkError = error.message === 'Network Error';
+        const isBackground = error.config?.url?.includes('/notifications') || error.config?.url?.includes('/marketing/flash-sale');
 
-        if (isTimeout || isBackground) {
-            console.warn(`[API ${isTimeout ? 'TIMEOUT' : 'QUIET ERROR'}] ${error.config?.method?.toUpperCase()} ${error.config?.url}`);
+        if (isTimeout || isNetworkError || isBackground) {
+            console.warn(`[API ${isTimeout ? 'TIMEOUT' : isNetworkError ? 'NETWORK ERROR' : 'QUIET ERROR'}] ${error.config?.method?.toUpperCase()} ${error.config?.url}`);
         } else {
             const data = error.response?.data;
             const message = data?.message || data?.error || error.message;

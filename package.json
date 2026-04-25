@@ -1,0 +1,26 @@
+{
+  "name": "slook-ecommerce",
+  "version": "1.0.0",
+  "description": "SLOOK E-Commerce Platform",
+  "private": true,
+  "workspaces": [
+    "slook",
+    "server"
+  ],
+  "scripts": {
+    "start": "npm start --workspace=server",
+    "dev": "concurrently \"npm run dev --workspace=slook\" \"npm run dev --workspace=server\"",
+    "build": "npm run build --workspace=slook",
+    "postinstall": "npm install --workspace=slook && npm install --workspace=server",
+    "preview": "npm run preview --workspace=slook"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "20.x"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

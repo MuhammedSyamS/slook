@@ -179,7 +179,7 @@ const CartDrawer = () => {
                                                     <div>
                                                         <div className="flex justify-between items-start gap-1">
                                                             <p className="font-black text-[11px] md:text-[9px] uppercase tracking-normal md:tracking-wider text-black leading-tight flex-1 line-clamp-2">{item.name}</p>
-                                                            <Price amount={item.price} className="font-black text-[10px] md:text-[9px] text-black bg-zinc-100 px-1.5 py-0.5 rounded shrink-0" />
+                                                            <Price amount={item.price ?? 0} className="font-black text-[10px] md:text-[9px] text-black bg-zinc-100 px-1.5 py-0.5 rounded shrink-0" />
                                                         </div>
                                                         {item.selectedVariant && (
                                                             <p className="text-[10px] md:text-[8px] text-zinc-400 font-bold uppercase mt-0.5 flex items-center gap-1">
@@ -293,7 +293,7 @@ const CartDrawer = () => {
                                                             </div>
                                                         </div>
                                                     <p className="text-[9px] font-black uppercase truncate text-zinc-600 group-hover:text-black transition-colors mb-1">{sug.name}</p>
-                                                    <Price amount={sug.price} className="text-[10px] font-bold text-zinc-900" />
+                                                    <Price amount={sug.price ?? 0} className="text-[10px] font-bold text-zinc-900" />
                                                 </div>
                                             ))}
                                         </div>
@@ -336,7 +336,7 @@ const CartDrawer = () => {
                                                         </div>
                                                     </div>
                                                     <p className="text-[9px] font-black uppercase truncate text-zinc-600 group-hover:text-black transition-colors">{sug.name}</p>
-                                                    <Price amount={sug.price} className="text-[10px] font-bold text-zinc-900 mt-0.5" />
+                                                    <Price amount={sug.price ?? 0} className="text-[10px] font-bold text-zinc-900 mt-0.5" />
                                                 </div>
                                             ))}
                                     </div>
@@ -355,7 +355,7 @@ const CartDrawer = () => {
                                             <div className="flex-1 flex justify-between items-center">
                                                 <div>
                                                     <p className="font-black text-[10px] uppercase text-zinc-600 line-clamp-1">{item.name}</p>
-                                                    <Price amount={item.price} className="text-[10px] font-bold text-zinc-400" />
+                                                    <Price amount={item.price ?? 0} className="text-[10px] font-bold text-zinc-400" />
                                                 </div>
                                                 <button onClick={() => handleMoveToCart(item._id)} className="text-[9px] font-black uppercase bg-white px-3 py-2 rounded-lg border border-zinc-200 hover:border-black shadow-sm active:scale-95 transition-all">
                                                     Move to Cart

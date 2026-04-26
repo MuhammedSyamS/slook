@@ -179,7 +179,8 @@ const CartDrawer = () => {
                                                     <div>
                                                         <div className="flex justify-between items-start gap-1">
                                                             <p className="font-black text-[11px] md:text-[9px] uppercase tracking-normal md:tracking-wider text-black leading-tight flex-1 line-clamp-2">{item.name}</p>
-                                                            <Price amount={item.price ?? 0} className="font-black text-[10px] md:text-[9px] text-black bg-zinc-100 px-1.5 py-0.5 rounded shrink-0" />
+                                                            <Price amount={item.price ?? 0} className="font-black text-[10px] md:text-[9px] text-black bg-zinc-100 px-1.5 py-0.5 rounded shrink-0" /> 
+
                                                         </div>
                                                         {item.selectedVariant && (
                                                             <p className="text-[10px] md:text-[8px] text-zinc-400 font-bold uppercase mt-0.5 flex items-center gap-1">

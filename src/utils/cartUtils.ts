@@ -3,7 +3,7 @@ import { IVariant, IProduct } from '@/types/product';
 /**
  * Robustly compares two variant objects (size, color, etc.)
  */
-export const isSameVariant = (v1: IVariant | null, v2: IVariant | null) => {
+export const isSameVariant = (v1: IVariant | null | undefined, v2: IVariant | null | undefined) => {
   if (!v1 && !v2) return true;
   if (!v1 || !v2) return false;
   

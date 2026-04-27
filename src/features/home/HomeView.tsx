@@ -285,6 +285,7 @@ export const HomeView = () => {
                           alt={slide.title}
                           fill
                           priority={idx === 0}
+                          loading={idx === 0 ? undefined : "lazy"}
                           sizes="100vw"
                           className="object-cover pointer-events-none select-none"
                           draggable={false}

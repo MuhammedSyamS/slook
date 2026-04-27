@@ -494,8 +494,8 @@ export const ProductDetailsView = () => {
                 const videos = activeReviewItem?.videos || (activeReviewItem?.video ? [activeReviewItem.video] : []);
                 const images = activeReviewItem?.images || (activeReviewItem?.reviewImage ? [activeReviewItem.reviewImage] : []);
                 const allMedia = [
-                  ...videos.map(v => ({ type: 'video', url: v })),
-                  ...images.map(i => ({ type: 'image', url: i }))
+                  ...videos.map((v: string) => ({ type: 'video', url: v })),
+                  ...images.map((i: string) => ({ type: 'image', url: i }))
                 ];
                 const currentMedia = allMedia[selectedMediaIdx] || null;
 
@@ -564,7 +564,7 @@ export const ProductDetailsView = () => {
                               <>
                                 <button onClick={(e) => { e.stopPropagation(); setSelectedMediaIdx((prev) => (prev - 1 + allMedia.length) % allMedia.length); }} className="hidden md:flex absolute left-6 bottom-10 p-3 text-white/60 hover:text-white transition-all z-20"><ChevronLeft size={20} /></button>
                                 <button onClick={(e) => { e.stopPropagation(); setSelectedMediaIdx((prev) => (prev + 1) % allMedia.length); }} className="hidden md:flex absolute right-6 bottom-10 p-3 text-white/60 hover:text-white transition-all z-20"><ChevronRight size={20} /></button>
-                                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">{allMedia.map((_, i) => <div key={i} className={`w-1 h-1 rounded-full transition-all duration-300 ${i === selectedMediaIdx ? 'bg-white scale-125' : 'bg-white/20'}`} />)}</div>
+                                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">{allMedia.map((_: any, i: number) => <div key={i} className={`w-1 h-1 rounded-full transition-all duration-300 ${i === selectedMediaIdx ? 'bg-white scale-125' : 'bg-white/20'}`} />)}</div>
                               </>
                             )}
                           </>
@@ -798,13 +798,37 @@ export const ProductDetailsView = () => {
 
                 <div className="hidden lg:flex flex-col space-y-3">
                   <button
-                    onClick={() => { addToCart({ ...product, product: product._id, price: currentPrice, selectedVariant, quantity }); addToast("Added to Bag", "success"); }}
+                    onClick={() => { 
+                      addToCart({ 
+                        _id: product._id,
+                        product: product._id, 
+                        name: product.name,
+                        price: currentPrice, 
+                        image: resolveMediaURL(variantForcedImage || product.image) || "/placeholder.jpg",
+                        selectedVariant: selectedVariant || undefined, 
+                        quantity: quantity,
+                        category: product.category,
+                        slug: product.slug
+                      }); 
+                      addToast("Added to Bag", "success"); 
+                    }}
                     className="w-full h-16 bg-black text-white rounded-2xl font-black uppercase tracking-widest text-base md:text-xs hover:bg-zinc-800 transition-all active:scale-[0.98] flex items-center justify-center gap-3 shadow-xl"
                   >
                     <ShoppingBag size={20} /> Add to Bag
                   </button>
                   <button
-                    onClick={() => { sessionStorage.setItem('checkoutSingleItem', JSON.stringify({ _id: product._id, product: product, name: product.name, price: currentPrice, image: variantForcedImage || product.image, selectedVariant: selectedVariant, quantity: quantity })); router.push('/checkout'); }}
+                    onClick={() => { 
+                      sessionStorage.setItem('checkoutSingleItem', JSON.stringify({ 
+                        _id: product._id, 
+                        product: product, 
+                        name: product.name, 
+                        price: currentPrice, 
+                        image: resolveMediaURL(variantForcedImage || product.image) || "/placeholder.jpg", 
+                        selectedVariant: selectedVariant, 
+                        quantity: quantity 
+                      })); 
+                      router.push('/checkout'); 
+                    }}
                     className="w-full h-16 bg-white border-2 border-black text-black rounded-2xl font-black uppercase tracking-widest text-base md:text-xs hover:bg-black hover:text-white transition-all active:scale-[0.98] flex items-center justify-center gap-3"
                   >
                     <ShieldCheck size={20} /> Secure Checkout
@@ -827,13 +851,37 @@ export const ProductDetailsView = () => {
             </div>
             <div className="flex-[2.5] flex gap-2">
               <button
-                onClick={() => { addToCart({ ...product, product: product._id, price: currentPrice, selectedVariant, quantity }); addToast("Added to Bag", "success"); }}
+                onClick={() => { 
+                  addToCart({ 
+                    _id: product._id,
+                    product: product._id, 
+                    name: product.name,
+                    price: currentPrice, 
+                    image: resolveMediaURL(variantForcedImage || product.image) || "/placeholder.jpg",
+                    selectedVariant: selectedVariant || undefined, 
+                    quantity: quantity,
+                    category: product.category,
+                    slug: product.slug
+                  }); 
+                  addToast("Added to Bag", "success"); 
+                }}
                 className="flex-1 h-10 bg-zinc-100 text-black rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center justify-center active:scale-95 transition-all border border-zinc-200"
               >
                 <ShoppingBag size={10} />
               </button>
               <button
-                onClick={() => { sessionStorage.setItem('checkoutSingleItem', JSON.stringify({ _id: product._id, product: product, name: product.name, price: currentPrice, image: variantForcedImage || product.image, selectedVariant: selectedVariant, quantity: quantity })); router.push('/checkout'); }}
+                onClick={() => { 
+                  sessionStorage.setItem('checkoutSingleItem', JSON.stringify({ 
+                    _id: product._id, 
+                    product: product, 
+                    name: product.name, 
+                    price: currentPrice, 
+                    image: resolveMediaURL(variantForcedImage || product.image) || "/placeholder.jpg", 
+                    selectedVariant: selectedVariant, 
+                    quantity: quantity 
+                  })); 
+                  router.push('/checkout'); 
+                }}
                 className="flex-[3] h-10 bg-zinc-900 text-white rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center justify-center gap-1 active:scale-95 transition-all shadow-xl"
               >
                 <Zap size={10} fill="currentColor" /> Secure Checkout

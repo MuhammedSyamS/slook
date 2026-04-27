@@ -147,9 +147,15 @@ export const CommunityView = () => {
 
         look.products.forEach((prod: any) => {
             addToCart({
-                ...prod,
+                _id: prod._id,
+                product: prod._id,
+                name: prod.name || 'Unnamed Artifact',
+                price: Number(prod.price) || 0,
+                image: resolveMediaURL(prod.image) || "/placeholder.jpg",
                 quantity: 1,
-                selectedVariant: null
+                selectedVariant: undefined,
+                category: prod.category,
+                slug: prod.slug
             });
         });
         success("Full Look Added to Bag! ✨");

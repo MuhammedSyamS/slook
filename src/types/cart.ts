@@ -1,10 +1,15 @@
 import { IProduct, IVariant } from './product';
 
-export interface ICartItem extends Partial<IProduct> {
-    product: string | IProduct;
+export interface ICartItem {
+    product: string;
+    _id: string;
+    name: string;
+    price: number;
+    image: string;
     quantity: number;
+    category?: string;
+    slug?: string;
     selectedVariant?: IVariant;
-    _id?: string;
 }
 
 export interface ICoupon {

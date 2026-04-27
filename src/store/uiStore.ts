@@ -2,6 +2,16 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { client as api } from '@/lib/api/client';
 
+interface IFlashSale {
+  _id: string;
+  name: string;
+  discountPercentage: number;
+  endTime: string;
+  startTime: string;
+  isActive: boolean;
+  products: any[];
+}
+
 interface UIState {
   isSearchOpen: boolean;
   isCartOpen: boolean;
@@ -10,7 +20,7 @@ interface UIState {
   isMenuOpen: boolean;
   currency: string;
   currencyRates: Record<string, number>;
-  flashSale: Record<string, unknown> | null;
+  flashSale: IFlashSale | null;
   toggleSearch: () => void;
   toggleCart: (open?: boolean) => void;
   toggleDesktopSidebar: () => void;

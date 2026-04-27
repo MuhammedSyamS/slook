@@ -73,7 +73,7 @@ export const AdminBlogView = () => {
         try {
             const payload = {
                 ...formData,
-                tags: formData.tags.split(',').map(t => t.trim()).filter(Boolean)
+                tags: formData.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
             };
 
             if (isEditing) {
@@ -158,7 +158,7 @@ export const AdminBlogView = () => {
                     
                     <div className="space-y-3 max-h-[80vh] overflow-y-auto pr-2 custom-scrollbar">
                         <AnimatePresence mode="popLayout">
-                            {posts.map(post => (
+                            {posts.map((post: any) => (
                                 <motion.div 
                                     key={post._id}
                                     initial={{ opacity: 0, x: -20 }}

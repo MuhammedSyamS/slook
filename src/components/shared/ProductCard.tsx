@@ -76,8 +76,8 @@ const ProductCard: React.FC<ProductCardProps> = memo(({ product, onAddToCart }) 
     : (totalVariantStock !== null && totalVariantStock <= 0);
 
   const { isFlashSale, finalPrice, salePrice } = React.useMemo(() => {
-    const isFS = !!flashSale?.products?.some((p: any) => (p._id || p) === product._id);
-    const sPrice = isFS ? Math.round(product.price * (1 - flashSale.discountPercentage / 100)) : null;
+    const isFS = Array.isArray(flashSale?.products) && flashSale.products.some((p: any) => (p._id || p) === product._id);
+    const sPrice = isFS && flashSale ? Math.round(product.price * (1 - ((flashSale as any).discountPercentage || 0) / 100)) : null;
     return {
       isFlashSale: isFS,
       salePrice: sPrice,
@@ -91,7 +91,7 @@ const ProductCard: React.FC<ProductCardProps> = memo(({ product, onAddToCart }) 
   }, [user, wishlist, product._id]);
 
   const inCart = React.useMemo(() => {
-    return (cartItems || []).some(item => (item.product?._id || item.product || item._id).toString() === product._id.toString());
+    return (cartItems || []).some(item => (item.product || item._id).toString() === product._id.toString());
   }, [cartItems, product._id]);
 
   const handleWishlistClick = async (e: React.MouseEvent) => {
@@ -121,17 +121,15 @@ const ProductCard: React.FC<ProductCardProps> = memo(({ product, onAddToCart }) 
     setCartLoading(true);
     try {
       const variantData = hasVariants
-        ? { 
-            size: selectedSize || product.variants[0].size, 
-            color: product.variants.find((v: any) => v.size === (selectedSize || product.variants[0].size))?.color || product.variants[0].color 
-          }
-        : null;
+        ? product.variants.find((v: any) => v.size === (selectedSize || product.variants[0].size)) || product.variants[0]
+        : undefined;
 
       await addItem({
         _id: product._id,
-        name: product.name,
-        price: finalPrice,
-        image: resolveMediaURL(product.image),
+        product: product._id,
+        name: product.name || 'Unnamed Artifact',
+        price: Number(finalPrice) || 0,
+        image: resolveMediaURL(product.image) || "/placeholder.jpg",
         quantity: 1,
         selectedVariant: variantData
       });

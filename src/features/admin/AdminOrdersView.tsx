@@ -154,7 +154,7 @@ export const AdminOrdersView = () => {
 
             {/* STATUS TABS */}
             <div className="flex gap-1 p-1 bg-zinc-900/5 rounded-xl border border-white overflow-x-auto no-scrollbar max-w-max">
-                {tabs.map(tab => (
+                {tabs.map((tab: string) => (
                     <button
                         key={tab}
                         onClick={() => { setActiveTab(tab); setPage(1); }}
@@ -195,7 +195,7 @@ export const AdminOrdersView = () => {
                                         <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest italic">No matching lifecycle entries</p>
                                     </td>
                                 </tr>
-                            ) : orders.map((o) => (
+                            ) : orders.map((o: any) => (
                                 <React.Fragment key={o._id}>
                                     <tr className={`hover:bg-blue-50/30 transition-colors group ${expandedRows.has(o._id) ? 'bg-zinc-50' : ''}`}>
                                         <td className="px-6 py-4 text-center">
@@ -227,7 +227,7 @@ export const AdminOrdersView = () => {
                                                 onChange={(e) => handleStatusChange(o._id, e.target.value)}
                                                 className={`appearance-none text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-lg border focus:ring-2 ring-black/5 outline-none transition-all cursor-pointer ${getStatusStyles(o.orderStatus)}`}
                                             >
-                                                {['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Returned', 'Exchanged'].map(s => (
+                                                {['Pending', 'Confirmed', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Returned', 'Exchanged'].map((s: string) => (
                                                     <option key={s} value={s}>{s}</option>
                                                 ))}
                                             </select>

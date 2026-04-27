@@ -194,16 +194,15 @@ const CartDrawer = () => {
                                                     <div className="flex flex-wrap items-center justify-between gap-1.5 mt-1.5">
                                                         <div className="flex flex-wrap items-center gap-1.5">
                                                             <div className="flex items-center gap-2 md:gap-1.5 bg-zinc-100 rounded-xl md:rounded-lg px-2 py-1.5 md:px-2.5 md:py-1 border border-zinc-200/50">
-                                                                <button onClick={() => updateQuantity(item._id, item.selectedVariant, -1)} className="text-zinc-400 hover:text-black transition-colors p-0.5"><Minus className="w-2.5 h-2.5 md:w-2.5 md:h-2.5" /></button>
+                                                                <button onClick={() => updateQuantity(item.product, item.selectedVariant, -1)} className="text-zinc-400 hover:text-black transition-colors p-0.5"><Minus className="w-2.5 h-2.5 md:w-2.5 md:h-2.5" /></button>
                                                                 <span className="font-black text-[10px] md:text-[9px] w-3 text-center text-black">{item.quantity}</span>
-                                                                <button onClick={() => updateQuantity(item._id, item.selectedVariant, 1)} className="text-zinc-400 hover:text-black transition-colors p-0.5"><Plus className="w-2.5 h-2.5 md:w-2.5 md:h-2.5" /></button>
+                                                                <button onClick={() => updateQuantity(item.product, item.selectedVariant, 1)} className="text-zinc-400 hover:text-black transition-colors p-0.5"><Plus className="w-2.5 h-2.5 md:w-2.5 md:h-2.5" /></button>
                                                             </div>
                                                         </div>
                                                         <div className="flex items-center gap-0.5">
                                                             <button 
                                                                 onClick={() => {
-                                                                    const productId = (item.product?._id || item.product || item._id || '').toString();
-                                                                    handleSaveForLater(item._id, productId, item.selectedVariant);
+                                                                    handleSaveForLater(item._id, item.product, item.selectedVariant);
                                                                 }} 
                                                                 className="p-1 text-zinc-300 hover:text-amber-500 transition-colors" 
                                                                 title="Save for Later"
@@ -212,8 +211,7 @@ const CartDrawer = () => {
                                                             </button>
                                                             <button 
                                                                 onClick={() => { 
-                                                                    const productId = (item.product?._id || item.product || item._id || '').toString();
-                                                                    removeItem(productId, item.selectedVariant, item._id); 
+                                                                    removeItem(item.product, item.selectedVariant, item._id); 
                                                                     addToast("Item removed", "info"); 
                                                                 }} 
                                                                 className="p-1 text-zinc-300 hover:text-red-500 transition-colors" 
@@ -284,7 +282,17 @@ const CartDrawer = () => {
                                                                 <button 
                                                                     onClick={(e) => { 
                                                                         e.stopPropagation(); 
-                                                                        addItem({ ...sug, quantity: 1, selectedVariant: sug.variants?.[0] || {} }); 
+                                                                        addItem({ 
+                                                                            _id: sug._id,
+                                                                            product: sug._id,
+                                                                            name: sug.name || 'Unnamed Artifact',
+                                                                            price: Number(sug.price) || 0,
+                                                                            image: resolveMediaURL(sug.image) || "/placeholder.jpg",
+                                                                            quantity: 1, 
+                                                                            selectedVariant: sug.variants?.[0] || undefined,
+                                                                            category: sug.category,
+                                                                            slug: sug.slug
+                                                                        }); 
                                                                         addToast(`Added ${sug.name} to selection`, "success");
                                                                     }}
                                                                     className="bg-black text-white p-1.5 rounded-full shadow-lg hover:scale-110 transition-transform"
@@ -318,7 +326,7 @@ const CartDrawer = () => {
                                     </div>
                                     <div ref={scrollRef} className="flex gap-4 overflow-x-auto no-scrollbar pb-2 px-1 snap-x">
                                         {suggestions
-                                            .filter(s => !cartItems.some(c => (c.product?._id || c.product || c._id) === s._id))
+                                            .filter(s => !cartItems.some(c => (c.product === s._id || c._id === s._id)))
                                             .map((sug, idx) => (
                                                 <div key={`rec-${idx}`} onClick={() => { router.push(`/product/${sug.slug || sug._id}`); toggleCart(false); }} className="min-w-[130px] snap-center bg-white p-3 rounded-2xl border border-zinc-100 shadow-sm cursor-pointer hover:border-black transition-all group relative">
                                                     <div className="aspect-[3/4] bg-zinc-50 rounded-xl overflow-hidden mb-3 relative">
@@ -327,7 +335,17 @@ const CartDrawer = () => {
                                                             <button 
                                                                 onClick={(e) => { 
                                                                     e.stopPropagation(); 
-                                                                    addItem({ ...sug, quantity: 1, selectedVariant: sug.variants?.[0] || {} }); 
+                                                                    addItem({ 
+                                                                        _id: sug._id,
+                                                                        product: sug._id,
+                                                                        name: sug.name || 'Unnamed Artifact',
+                                                                        price: Number(sug.price) || 0,
+                                                                        image: resolveMediaURL(sug.image) || "/placeholder.jpg",
+                                                                        quantity: 1, 
+                                                                        selectedVariant: sug.variants?.[0] || undefined,
+                                                                        category: sug.category,
+                                                                        slug: sug.slug
+                                                                    }); 
                                                                     addToast(`Added ${sug.name} to cart`, "success");
                                                                 }}
                                                                 className="bg-black text-white p-1.5 rounded-full shadow-lg hover:scale-110 transition-transform"

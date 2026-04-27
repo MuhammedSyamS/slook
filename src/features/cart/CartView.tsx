@@ -57,7 +57,11 @@ export const CartView = () => {
                 cartTotal: subtotal,
                 userId: user?._id
             });
-            applyCoupon({ code: data.code, discount: data.discount });
+            applyCoupon({ 
+                code: data.code, 
+                discount: data.discount,
+                discountType: data.discountType || 'fixed'
+            });
             setCouponCode('');
         } catch (err: any) {
             alert(err.response?.data?.message || "Invalid Coupon");
@@ -135,16 +139,16 @@ export const CartView = () => {
 
                                             <div className="flex items-center justify-between mt-8">
                                                 <div className="flex items-center gap-6 bg-zinc-50 px-6 py-3 rounded-2xl border border-zinc-100">
-                                                    <button onClick={() => updateQuantity(item._id, item.selectedVariant, -1)} className="text-zinc-400 hover:text-black transition-colors"><Minus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.product, item.selectedVariant, -1)} className="text-zinc-400 hover:text-black transition-colors"><Minus size={14} /></button>
                                                     <span className="w-4 text-center text-xs font-black">{item.quantity}</span>
-                                                    <button onClick={() => updateQuantity(item._id, item.selectedVariant, 1)} className="text-zinc-400 hover:text-black transition-colors"><Plus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.product, item.selectedVariant, 1)} className="text-zinc-400 hover:text-black transition-colors"><Plus size={14} /></button>
                                                 </div>
                                                 
                                                 <div className="flex items-center gap-4">
                                                     <button className="text-[9px] font-black uppercase tracking-widest text-zinc-300 hover:text-amber-500 transition-colors">Move to Saved</button>
                                                     <div className="w-1 h-1 bg-zinc-100 rounded-full" />
                                                     <button 
-                                                        onClick={() => removeItem(item._id, item.selectedVariant)}
+                                                        onClick={() => removeItem(item.product, item.selectedVariant, item._id)}
                                                         className="text-[9px] font-black uppercase tracking-widest text-zinc-300 hover:text-red-500 transition-colors"
                                                     >
                                                         Remove

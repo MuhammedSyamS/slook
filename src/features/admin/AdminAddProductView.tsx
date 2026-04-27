@@ -128,7 +128,7 @@ export const AdminAddProductView = () => {
   };
 
   const removeImage = (index: number) => {
-    setFormData(prev => ({ ...prev, images: prev.images.filter((_, i) => i !== index) }));
+    setFormData(prev => ({ ...prev, images: prev.images.filter((_: string, i: number) => i !== index) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -423,7 +423,7 @@ export const AdminAddProductView = () => {
                     />
                   </div>
                   <div className="grid grid-cols-4 gap-4 mt-4">
-                    {formData.images.map((img, idx) => (
+                    {formData.images.map((img: string, idx: number) => (
                       <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-zinc-200 bg-zinc-50">
                         <img src={resolveMediaURL(img)} alt="" className="w-full h-full object-cover" />
                         <button type="button" onClick={() => removeImage(idx)} className="absolute top-1 right-1 bg-white rounded-full p-1 shadow hover:text-red-500">
@@ -550,7 +550,7 @@ export const AdminAddProductView = () => {
                              if(e.key === 'Enter') {
                                e.preventDefault();
                                const sizes = quickVariantType === 'clothing' ? ['S', 'M', 'L', 'XL'] : ['6', '7', '8', '9', '10', '11'];
-                               const newVariants = sizes.map(size => ({ size, color: quickVariantColor.trim(), stock: 10 }));
+                               const newVariants = sizes.map((size: string) => ({ size, color: quickVariantColor.trim(), stock: 10 }));
                                const updatedVariants = [...(formData.variants || []), ...newVariants];
                                const total = updatedVariants.reduce((acc, curr) => acc + (Number(curr.stock) || 0), 0);
                                setFormData({ ...formData, variants: updatedVariants, countInStock: total });
@@ -575,7 +575,7 @@ export const AdminAddProductView = () => {
                            type="button"
                            onClick={() => {
                              const sizes = quickVariantType === 'clothing' ? ['S', 'M', 'L', 'XL'] : ['6', '7', '8', '9', '10', '11'];
-                             const newVariants = sizes.map(size => ({ size, color: quickVariantColor.trim(), stock: 10 }));
+                             const newVariants = sizes.map((size: string) => ({ size, color: quickVariantColor.trim(), stock: 10 }));
                              const updatedVariants = [...(formData.variants || []), ...newVariants];
                              const total = updatedVariants.reduce((acc, curr) => acc + (Number(curr.stock) || 0), 0);
                              setFormData({ ...formData, variants: updatedVariants, countInStock: total });
@@ -592,7 +592,7 @@ export const AdminAddProductView = () => {
 
                   {formData.variants && formData.variants.length > 0 ? (
                     <div className="space-y-3">
-                      {formData.variants.map((variant, idx) => (
+                      {formData.variants.map((variant: any, idx: number) => (
                         <div
                           key={idx}
                           onClick={() => setPreviewVariantIdx(idx)}

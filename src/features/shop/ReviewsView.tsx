@@ -100,8 +100,8 @@ export const ReviewsView = () => {
                                 const videos = activeReviewItem?.review?.videos || (activeReviewItem?.review?.video ? [activeReviewItem.review.video] : []);
                                 const images = activeReviewItem?.review?.images || [];
                                 const allMedia = [
-                                    ...videos.map(v => ({ type: 'video', url: v })),
-                                    ...images.map(i => ({ type: 'image', url: i }))
+                                    ...videos.map((v: string) => ({ type: 'video', url: v })),
+                                    ...images.map((i: string) => ({ type: 'image', url: i }))
                                 ];
                                 const currentMedia = allMedia[selectedMediaIdx] || null;
 
@@ -126,7 +126,7 @@ export const ReviewsView = () => {
                                                     
                                                     {allMedia.length > 1 && (
                                                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/10 backdrop-blur-md px-3 py-1.5 rounded-full">
-                                                            {allMedia.map((_, i) => (
+                                                            {allMedia.map((_: any, i: number) => (
                                                                 <button 
                                                                     key={i} 
                                                                     onClick={() => setSelectedMediaIdx(i)}
@@ -282,11 +282,11 @@ export const ReviewsView = () => {
                                         const videos = item.review.videos || (item.review.video ? [item.review.video] : []);
                                         const images = item.review.images || [];
                                         const allMedia = [
-                                            ...videos.map(v => ({ type: 'video', url: v })),
-                                            ...images.map(i => ({ type: 'image', url: i }))
+                                            ...videos.map((v: string) => ({ type: 'video', url: v })),
+                                            ...images.map((i: string) => ({ type: 'image', url: i }))
                                         ];
 
-                                        return allMedia.slice(0, 3).map((media, idx) => (
+                                        return allMedia.slice(0, 3).map((media: any, idx: number) => (
                                             <div
                                                 key={idx}
                                                 onClick={() => {

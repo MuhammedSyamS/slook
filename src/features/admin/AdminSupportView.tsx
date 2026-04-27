@@ -73,7 +73,7 @@ export const AdminSupportView = () => {
 
         // --- SOCKET.IO ---
         if (!socketRef.current && user?.token) {
-            const socketUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000';
+            const socketUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5005';
             socketRef.current = io(socketUrl, {
                 auth: { token: user.token }
             });

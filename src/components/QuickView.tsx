@@ -42,10 +42,12 @@ const QuickView: React.FC<QuickViewProps> = ({ product, isOpen, onClose }) => {
             const variant = product.variants?.find((v: any) => v.size === selectedSize && v.color === selectedColor);
 
             await addItem({
-                ...product,
-                price: variant?.price || product.price,
-                image: variant?.image || product.image,
-                selectedVariant: variant ? { size: selectedSize, color: selectedColor } : null,
+                _id: product._id,
+                product: product._id,
+                name: product.name || 'Unnamed Artifact',
+                price: Number(variant?.price || product.price || 0),
+                image: resolveMediaURL(variant?.image || product.image) || "/placeholder.jpg",
+                selectedVariant: variant || undefined,
                 quantity: 1
             });
 

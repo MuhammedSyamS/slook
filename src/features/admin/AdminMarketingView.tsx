@@ -294,7 +294,7 @@ export const AdminMarketingView = () => {
                 {activeTab === 'Coupons' && (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="lg:col-span-2 space-y-4">
-                            {coupons.length === 0 ? <div className="text-center py-10 text-zinc-400 uppercase font-black text-[10px] tracking-widest">No Active Coupons</div> : coupons.map(coupon => (
+                            {coupons.length === 0 ? <div className="text-center py-10 text-zinc-400 uppercase font-black text-[10px] tracking-widest">No Active Coupons</div> : coupons.map((coupon: any) => (
                                 <div key={coupon._id} className="bg-white p-6 rounded-2xl border border-zinc-100 flex items-center justify-between group hover:shadow-lg transition-all">
                                     <div className="flex items-center gap-4">
                                         <div className={`h-12 w-12 rounded-xl flex items-center justify-center font-black text-lg transition-colors ${coupon.isActive ? 'bg-black text-white' : 'bg-zinc-100 text-zinc-400'}`}>
@@ -392,7 +392,7 @@ export const AdminMarketingView = () => {
                                             <div className="space-y-2">
                                                 <label className="text-[9px] font-black uppercase text-zinc-400">Eligible Categories</label>
                                                 <div className="flex flex-wrap gap-2">
-                                                    {categories.map(cat => (
+                                                    {categories.map((cat: string) => (
                                                         <button
                                                             key={cat}
                                                             type="button"
@@ -447,7 +447,7 @@ export const AdminMarketingView = () => {
                 {activeTab === 'Flash Sales' && (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="lg:col-span-2 space-y-4">
-                            {flashSales.length === 0 ? <div className="text-center py-10 text-zinc-400 uppercase font-black text-[10px] tracking-widest">No Active Sales</div> : flashSales.map(sale => (
+                            {flashSales.length === 0 ? <div className="text-center py-10 text-zinc-400 uppercase font-black text-[10px] tracking-widest">No Active Sales</div> : flashSales.map((sale: any) => (
                                 <div key={sale._id} className="bg-white p-6 rounded-2xl border border-zinc-100 flex items-center justify-between group hover:shadow-lg transition-all relative overflow-hidden">
                                     <div className="absolute top-0 right-0 p-3 bg-red-500 text-white text-[9px] font-black uppercase rounded-bl-xl z-20">
                                         {sale.discountPercentage}% OFF
@@ -499,7 +499,7 @@ export const AdminMarketingView = () => {
                 {activeTab === 'Campaigns' && (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="lg:col-span-2 space-y-4">
-                            {broadcasts.map(broadcast => (
+                            {broadcasts.map((broadcast: any) => (
                                 <div key={broadcast._id} className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
                                     <div className="flex items-center justify-between mb-4">
                                         <div>
@@ -604,7 +604,7 @@ export const AdminMarketingView = () => {
                                 { title: "Inviter Reward", value: "₹500", desc: "Added to wallet after friend's first order delivery." },
                                 { title: "Friend Discount", value: "10% OFF", desc: "Applied via referral link signup code." },
                                 { title: "Eligibility", value: "Verified", desc: "Credit issued after lifecycle completion." }
-                            ].map((rule, i) => (
+                            ].map((rule: any, i: number) => (
                                 <div key={i} className="space-y-2">
                                     <p className="text-[10px] font-black uppercase text-purple-600 tracking-widest">{rule.title}</p>
                                     <h4 className="text-2xl font-black italic">{rule.value}</h4>
@@ -650,7 +650,7 @@ export const AdminMarketingView = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-zinc-50">
-                                        {abandonedCarts.length === 0 ? <tr><td colSpan={4} className="py-20 text-center text-zinc-400 text-[10px] uppercase font-black">No leaks detected</td></tr> : abandonedCarts.map(cartUser => {
+                                        {abandonedCarts.length === 0 ? <tr><td colSpan={4} className="py-20 text-center text-zinc-400 text-[10px] uppercase font-black">No leaks detected</td></tr> : abandonedCarts.map((cartUser: any) => {
                                             const total = cartUser.cart?.reduce((acc: number, item: any) => acc + (item.price * item.quantity), 0) || 0;
                                             return (
                                                 <tr key={cartUser._id} className="hover:bg-zinc-50/50 transition-colors">

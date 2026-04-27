@@ -33,12 +33,12 @@ interface ActiveFiltersProps {
     setCategory: (val: string) => void;
     subcategory: string;
     setSubcategory: (val: string) => void;
-    filters: { color: string; size: string; minRating: number; minDiscount: number };
-    setFilters: (val: { color: string; size: string; minRating: number; minDiscount: number }) => void;
-    flags: { isFlashSale: boolean };
-    setFlags: (val: { isFlashSale: boolean }) => void;
-    priceRange: { min: string | number; max: string | number };
-    setPriceRange: (val: { min: string | number; max: string | number }) => void;
+    filters: any;
+    setFilters: (val: any) => void;
+    flags: any;
+    setFlags: (val: any) => void;
+    priceRange: any;
+    setPriceRange: (val: any) => void;
     activeSpecs: Record<string, string[]>;
     toggleSpec: (key: string, val: string) => void;
     resetFilters: () => void;
@@ -71,7 +71,7 @@ const ActiveFilters = ({
 
     return (
         <div className="flex flex-wrap gap-2 mb-8 animate-in fade-in duration-500">
-            {activeFilters.map((f, i) => (
+            {activeFilters.map((f: any, i: number) => (
                 <button
                     key={i}
                     onClick={() => {
@@ -83,7 +83,7 @@ const ActiveFilters = ({
                         else if (f.type === 'discount') setFilters({ ...filters, minDiscount: 0 });
                         else if (f.type === 'flashSale') setFlags({ ...flags, isFlashSale: false });
                         else if (f.type === 'price') setPriceRange({ min: '', max: '' });
-                        else if (f.type === 'spec') toggleSpec(f.key, f.val);
+                        else if (f.type === 'spec' && f.key && f.val) toggleSpec(f.key, f.val);
                     }}
                     className="flex items-center gap-2 px-3 py-1.5 bg-white border border-black/10 rounded-full text-[8px] font-bold uppercase tracking-widest text-black hover:bg-black hover:text-white hover:border-black transition-all group shadow-sm"
                 >
@@ -627,7 +627,7 @@ export const ShopView: React.FC = () => {
                         
                         {loading ? (
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 md:gap-6">
-                                {[...Array(10)].map((_, i) => (
+                                {[...Array(10)].map((_: any, i: number) => (
                                     <div key={i} className="space-y-4">
                                         <Skeleton className="aspect-square w-full rounded-[2rem]" />
                                         <Skeleton className="h-4 w-3/4 mx-auto rounded-full" />
@@ -638,7 +638,7 @@ export const ShopView: React.FC = () => {
                         ) : (
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 md:gap-8 relative z-10">
                                 {products.length > 0 ? (
-                                    products.map((product, idx) => (
+                                    products.map((product: IProduct, idx: number) => (
                                         <div
                                             key={product._id}
                                             className="group/item animate-in fade-in slide-in-from-bottom-8 duration-1000 fill-mode-both"

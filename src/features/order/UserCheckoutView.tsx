@@ -59,7 +59,7 @@ export const UserCheckoutView = () => {
     const activeItems = singleItem ? [singleItem] : cartItems;
 
     const calculateSubtotal = () => {
-        return activeItems.reduce((acc, item) => {
+        return activeItems.reduce((acc: number, item: any) => {
             const price = item.price || item.product?.price || 0;
             const qty = item.quantity || 1;
             return acc + (price * qty);
@@ -166,7 +166,7 @@ export const UserCheckoutView = () => {
         setIsSubmitting(true);
         try {
             const orderData = {
-                orderItems: activeItems.map(item => ({
+                orderItems: activeItems.map((item: any) => ({
                     name: item.name || item.product?.name || 'Unknown Item',
                     qty: item.quantity || 1,
                     image: item.image || item.product?.image,
@@ -408,7 +408,7 @@ export const UserCheckoutView = () => {
                                         { id: 'netbanking', name: 'Net Banking', icon: <Landmark />, desc: 'All Indian Banks' },
                                         { id: 'wallet', name: 'Wallets', icon: <Wallet />, desc: 'Paytm, PhonePe, Amazon Pay' },
                                         { id: 'cod', name: 'Cash On Delivery', icon: <Truck />, desc: 'Pay with cash upon delivery' }
-                                    ].map(method => (
+                                    ].map((method: any) => (
                                         <div 
                                             key={method.id} 
                                             className={`
@@ -493,7 +493,7 @@ export const UserCheckoutView = () => {
                             <h3 className="!text-[12px] md:!text-[14px] font-black uppercase tracking-widest mb-6 border-b border-zinc-200 pb-4">Bag Summary</h3>
                             
                             <div className="space-y-4 mb-8 custom-scrollbar max-h-[40vh] overflow-y-auto pr-2">
-                                {activeItems.map((item, idx) => (
+                                {activeItems.map((item: any, idx: number) => (
                                     <div key={idx} className="flex gap-4 items-center">
                                         <div className="w-10 h-14 md:w-12 md:h-16 bg-white rounded-lg border border-zinc-200 overflow-hidden shrink-0">
                                             <img src={resolveMediaURL(item.image)} className="w-full h-full object-cover" alt="" />

@@ -10,7 +10,7 @@ export interface MediaOptions {
 }
 
 export const resolveMediaURL = (path: string | undefined | null, options: MediaOptions = {}) => {
-    if (!path) return undefined;
+    if (!path) return '/placeholder.jpg';
 
     // Fix backslashes
     const normalizedPath = path.replace(/\\/g, '/');

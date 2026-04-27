@@ -30,23 +30,52 @@ client.interceptors.request.use((config) => {
   return config;
 }, (error) => Promise.reject(error));
 
-// Response Interceptor: Global Error Handling
+// Response Interceptor: Global Error Handling & Refresh Flow
 client.interceptors.response.use(
   (response) => response,
-  (error) => {
-    // Handle 401 Unauthorized
-    if (error.response?.status === 401) {
-      if (typeof window !== 'undefined') {
-        console.warn("Session expired or invalid. Logging out...");
-        localStorage.removeItem('slook-auth-storage');
-        // Avoid infinite redirect loops if already on login
-        if (!window.location.pathname.includes('/login')) {
-           window.location.href = `/login?callbackUrl=${window.location.pathname}`;
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Handle 401 Unauthorized & Token Expiration
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      // Avoid infinite refresh loops
+      if (originalRequest.url?.includes('/users/refresh-token') || originalRequest.url?.includes('/users/login')) {
+         return Promise.reject(error);
+      }
+
+      originalRequest._retry = true;
+
+      try {
+        console.log("Attempting token refresh...");
+        const { data } = await axios.get(`${baseURL}/users/refresh-token`, { 
+          withCredentials: true 
+        });
+
+        if (data.accessToken) {
+          // Update local storage for next requests
+          const authStorage = localStorage.getItem('slook-auth-storage');
+          if (authStorage) {
+            const parsed = JSON.parse(authStorage);
+            parsed.state.user = { ...parsed.state.user, token: data.accessToken };
+            localStorage.setItem('slook-auth-storage', JSON.stringify(parsed));
+          }
+
+          // Retry the original request with new token
+          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+          return client(originalRequest);
+        }
+      } catch (refreshError) {
+        console.error("Token refresh failed. Redirecting to login...");
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('slook-auth-storage');
+          if (!window.location.pathname.includes('/login')) {
+             window.location.href = `/login?callbackUrl=${window.location.pathname}`;
+          }
         }
       }
     }
 
-    // Standardize error log for debugging without spamming
+    // Standardize error log for debugging
     if (process.env.NODE_ENV === 'development') {
         const isTimeout = error.message?.includes('timeout');
         const isNetworkError = error.message === 'Network Error';
@@ -57,8 +86,7 @@ client.interceptors.response.use(
         } else {
             const data = error.response?.data;
             const message = data?.message || data?.error || error.message;
-            const details = data?.errors ? ` | Details: ${JSON.stringify(data.errors)}` : '';
-            console.error(`[API ERROR] ${error.config?.method?.toUpperCase()} ${error.config?.url}:`, `${message}${details}`);
+            console.error(`[API ERROR] ${error.config?.method?.toUpperCase()} ${error.config?.url}:`, message);
         }
     }
     
